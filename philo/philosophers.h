@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:27:22 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/28 17:46:40 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:01:14 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				n_eat;
-	long int	t_last_meal;
+	long int		t_last_meal;
 	struct s_data	*data;
 	pthread_t		thread;
 	pthread_mutex_t	fork_l;
@@ -48,5 +48,17 @@ typedef struct s_data
 	pthread_mutex_t	finish;
 	pthread_mutex_t	dead;
 }					t_data;
+
+int					ft_atoi(const char *nptr);
+int					check_args(int argc, char **argv);
+t_data				*init_data(int argc, char **argv);
+int					init_philo(t_data *data);
+void				free_all(t_data *data);
+void				*routine(void *param);
+void				set_philosopher_death(t_philo *philo, int state);
+int					is_dead(t_philo *philo);
+void				*check_death(void *param);
+long int			get_time(void);
+void				print_state(t_philo *philo, char *str);
 
 #endif
