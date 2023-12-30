@@ -6,11 +6,13 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:56:38 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 14:28:21 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:26:32 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static void	unlink_sem(void);
 
 t_data	*init_data(int argc, char **argv)
 {
@@ -29,6 +31,7 @@ t_data	*init_data(int argc, char **argv)
 		return (NULL);
 	data->p_finish_eat = 0;
 	data->p_is_dead = 0;
+	unlink_sem();
 	data->print = sem_open("/print", O_CREAT, 0644, 1);
 	data->eat = sem_open("/eat", O_CREAT, 0644, 1);
 	data->finish = sem_open("/finish", O_CREAT, 0644, 1);
@@ -77,11 +80,15 @@ void	free_all(t_data *data)
 	sem_close(data->finish);
 	sem_close(data->dead);
 	sem_close(data->forks);
+	free(data->philo);
+	free(data);
+}
+
+static void	unlink_sem(void)
+{
 	sem_unlink("/print");
 	sem_unlink("/eat");
 	sem_unlink("/finish");
 	sem_unlink("/dead");
 	sem_unlink("/forks");
-	free(data->philo);
-	free(data);
 }

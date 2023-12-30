@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:57:58 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/29 16:42:16 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:32:41 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	print_state(t_philo *philo, char *str)
 
 	pthread_mutex_lock(&philo->data->print);
 	elapsed_time = get_time() - philo->data->t_start;
-	if (!philo->data->p_is_dead && elapsed_time >= 0 && elapsed_time <= INT_MAX
-		&& !is_dead(philo))
+	if (elapsed_time >= 0 && elapsed_time <= INT_MAX && !is_dead(philo))
 		printf("%lld %d %s\n", elapsed_time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->print);
 }
