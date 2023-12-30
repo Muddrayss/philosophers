@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:57:58 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 15:32:28 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 17:40:19 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	print_state(t_philo *philo, char *str)
 
 	sem_wait(philo->data->print);
 	elapsed_time = get_time() - philo->data->t_start;
-	if (elapsed_time >= 0 && elapsed_time <= INT_MAX && !is_dead(philo))
+	if (elapsed_time >= 0 && elapsed_time <= INT_MAX && !is_dead(philo)
+		&& (philo->n_eat != philo->data->n_eat || philo->data->n_eat == 0))
 		printf("%lld %d %s\n", elapsed_time, philo->id, str);
 	sem_post(philo->data->print);
 }

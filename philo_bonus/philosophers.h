@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:27:22 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 14:57:53 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 17:08:37 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	int				p_finish_eat;
 	long int		t_start;
 	int				p_is_dead;
+	int				print_override;
 	t_philo			*philo;
 	sem_t			*print;
 	sem_t			*eat;
