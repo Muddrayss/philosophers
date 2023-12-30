@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:56:38 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 16:24:45 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:59:13 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	init_philo(t_data *data)
 		usleep(100);
 	}
 	i = -1;
-	while (++i < data->n_philo)
-		waitpid(-1, NULL, 0);
+	waitpid(-1, NULL, 0);
+	printf("All philosophers have eaten %d times\n", data->n_eat);
 	return (0);
 }
 

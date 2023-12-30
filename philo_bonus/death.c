@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:58:31 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 17:48:26 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:32:55 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*check_death(void *param)
 		- philo->t_last_meal >= philo->data->t_die)
 	{
 		print_state(philo, " is dead");
-		set_philosopher_death(philo, 1);
+		exit(1);
 	}
 	sem_post(philo->data->eat);
 	sem_post(philo->data->finish);

@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:58 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 17:09:11 by egualand         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:52:04 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	*routine(void *param)
 		{
 			sem_wait(philo->data->finish);
 			if (++philo->data->p_finish_eat == philo->data->n_philo)
-				set_philosopher_death(philo, 2);
+				exit(2);
 			sem_post(philo->data->finish);
 			pthread_join(check_death_t, NULL);
 			return (NULL);
