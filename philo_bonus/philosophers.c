@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:58 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 17:09:11 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:07:23 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,15 @@ void	*routine(void *param)
 	philo = (t_philo *)param;
 	if (philo->id % 2 == 0)
 		usleep(philo->data->t_eat * 1000);
-	while (!is_dead(philo))
+	while (1)
 	{
 		pthread_create(&check_death_t, NULL, &check_death, param);
 		take_forks(philo);
 		eat_meal(philo);
 		if (philo->n_eat == philo->data->n_eat)
 		{
-			sem_wait(philo->data->finish);
-			if (++philo->data->p_finish_eat == philo->data->n_philo)
-				set_philosopher_death(philo, 2);
-			sem_post(philo->data->finish);
 			pthread_join(check_death_t, NULL);
-			return (NULL);
+			set_philosopher_death(philo, 100);
 		}
 		pthread_detach(check_death_t);
 	}
@@ -69,27 +65,27 @@ void	*routine(void *param)
 static void	take_forks(t_philo *philo)
 {
 	sem_wait(philo->data->forks);
-	print_state(philo, " has taken a fork");
+	print_state(philo, "has taken a fork");
 	if (philo->data->n_philo == 1)
 	{
 		usleep((philo->data->t_die * 1000) * 2);
 		return ;
 	}
 	sem_wait(philo->data->forks);
-	print_state(philo, " has taken a fork");
+	print_state(philo, "has taken a fork");
 }
 
 static void	eat_meal(t_philo *philo)
 {
 	sem_wait(philo->data->eat);
-	print_state(philo, " is eating");
+	print_state(philo, "is eating");
 	philo->t_last_meal = get_time();
 	philo->n_eat++;
 	sem_post(philo->data->eat);
 	usleep(philo->data->t_eat * 1000);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);
-	print_state(philo, " is sleeping");
+	print_state(philo, "is sleeping");
 	usleep(philo->data->t_sleep * 1000);
-	print_state(philo, " is thinking");
+	print_state(philo, "is thinking");
 }

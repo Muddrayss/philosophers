@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:58 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 15:02:38 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:58:41 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,27 @@ void	*routine(void *param)
 static void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork_l);
-	print_state(philo, " has taken a fork");
+	print_state(philo, "has taken a fork");
 	if (philo->data->n_philo == 1)
 	{
 		usleep((philo->data->t_die * 1000) * 2);
 		return ;
 	}
 	pthread_mutex_lock(philo->fork_r);
-	print_state(philo, " has taken a fork");
+	print_state(philo, "has taken a fork");
 }
 
 static void	eat_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->eat);
-	print_state(philo, " is eating");
+	print_state(philo, "is eating");
 	philo->t_last_meal = get_time();
 	philo->n_eat++;
 	pthread_mutex_unlock(&philo->data->eat);
 	usleep(philo->data->t_eat * 1000);
 	pthread_mutex_unlock(&philo->fork_l);
 	pthread_mutex_unlock(philo->fork_r);
-	print_state(philo, " is sleeping");
+	print_state(philo, "is sleeping");
 	usleep(philo->data->t_sleep * 1000);
-	print_state(philo, " is thinking");
+	print_state(philo, "is thinking");
 }

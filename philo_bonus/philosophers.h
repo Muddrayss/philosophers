@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:27:22 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 17:08:37 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:04:20 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ typedef struct s_data
 	int				p_finish_eat;
 	long int		t_start;
 	int				p_is_dead;
-	int				print_override;
 	t_philo			*philo;
 	sem_t			*print;
 	sem_t			*eat;
 	sem_t			*finish;
-	sem_t			*dead;
 	sem_t			*forks;
 }					t_data;
 
@@ -62,9 +60,9 @@ int					init_philo(t_data *data);
 void				free_all(t_data *data);
 void				*routine(void *param);
 void				set_philosopher_death(t_philo *philo, int state);
-int					is_dead(t_philo *philo);
 void				*check_death(void *param);
 long int			get_time(void);
 void				print_state(t_philo *philo, char *str);
+void				kill_all(t_data *data);
 
 #endif

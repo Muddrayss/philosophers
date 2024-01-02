@@ -6,29 +6,29 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:58:31 by egualand          #+#    #+#             */
-/*   Updated: 2023/12/30 17:48:26 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:18:37 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	set_philosopher_death(t_philo *philo, int state)
+static void	free_philo(t_philo *philo)
 {
-	sem_wait(philo->data->dead);
-	philo->data->p_is_dead = state;
-	sem_post(philo->data->dead);
+	t_data	*data;
+
+	data = philo->data;
+	sem_close(philo->data->print);
+	sem_close(philo->data->eat);
+	sem_close(philo->data->finish);
+	sem_close(philo->data->forks);
+	free(philo->data->philo);
+	free(data);
 }
 
-int	is_dead(t_philo *philo)
+void	set_philosopher_death(t_philo *philo, int state)
 {
-	sem_wait(philo->data->dead);
-	if (philo->data->p_is_dead)
-	{
-		sem_post(philo->data->dead);
-		return (1);
-	}
-	sem_post(philo->data->dead);
-	return (0);
+	free_philo(philo);
+	exit(state);
 }
 
 void	*check_death(void *param)
@@ -36,14 +36,13 @@ void	*check_death(void *param)
 	t_philo	*philo;
 
 	philo = (t_philo *)param;
-	usleep((philo->data->t_die * 1000) + 1000);
+	usleep((philo->data->t_die * 1000) + 5000);
 	sem_wait(philo->data->eat);
 	sem_wait(philo->data->finish);
-	if (!is_dead(philo) && get_time()
-		- philo->t_last_meal >= philo->data->t_die)
+	if (get_time() - philo->t_last_meal >= philo->data->t_die)
 	{
-		print_state(philo, " is dead");
-		set_philosopher_death(philo, 1);
+		print_state(philo, "is dead");
+		set_philosopher_death(philo, 200);
 	}
 	sem_post(philo->data->eat);
 	sem_post(philo->data->finish);
