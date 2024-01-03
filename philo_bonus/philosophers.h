@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:27:22 by egualand          #+#    #+#             */
-/*   Updated: 2024/01/02 16:04:20 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:50:50 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	sem_t			*print;
 	sem_t			*eat;
 	sem_t			*finish;
+	sem_t			*dead;
 	sem_t			*forks;
 }					t_data;
 
@@ -64,5 +65,7 @@ void				*check_death(void *param);
 long int			get_time(void);
 void				print_state(t_philo *philo, char *str);
 void				kill_all(t_data *data);
+void				post_all(t_data *data);
+void				*sem_check(void *param);
 
 #endif

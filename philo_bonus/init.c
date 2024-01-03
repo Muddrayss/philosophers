@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:56:38 by egualand          #+#    #+#             */
-/*   Updated: 2024/01/02 16:18:44 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:42:43 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_data	*init_data(int argc, char **argv)
 	data->print = sem_open("/print", O_CREAT, 0644, 1);
 	data->eat = sem_open("/eat", O_CREAT, 0644, 1);
 	data->finish = sem_open("/finish", O_CREAT, 0644, 1);
+	data->dead = sem_open("/dead", O_CREAT, 0644, 0);
 	data->forks = sem_open("/forks", O_CREAT, 0644, data->n_philo);
 	return (data);
 }
@@ -72,6 +73,7 @@ void	free_all(t_data *data)
 	sem_close(data->print);
 	sem_close(data->eat);
 	sem_close(data->finish);
+	sem_close(data->dead);
 	sem_close(data->forks);
 	free(data->philo);
 	free(data);
@@ -82,6 +84,7 @@ static void	unlink_sem(void)
 	sem_unlink("/print");
 	sem_unlink("/eat");
 	sem_unlink("/finish");
+	sem_unlink("/dead");
 	sem_unlink("/forks");
 }
 

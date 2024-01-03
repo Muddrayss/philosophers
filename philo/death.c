@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:58:31 by egualand          #+#    #+#             */
-/*   Updated: 2024/01/02 14:58:41 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:51:36 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*check_death(void *param)
 	t_philo	*philo;
 
 	philo = (t_philo *)param;
-	usleep((philo->data->t_die * 1000) + 1000);
+	usleep((philo->data->t_die * 1000) + 7000);
 	pthread_mutex_lock(&philo->data->eat);
 	pthread_mutex_lock(&philo->data->finish);
 	if (!is_dead(philo) && get_time()

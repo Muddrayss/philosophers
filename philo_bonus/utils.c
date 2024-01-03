@@ -6,7 +6,7 @@
 /*   By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:57:58 by egualand          #+#    #+#             */
-/*   Updated: 2024/01/02 16:20:27 by egualand         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:29:40 by egualand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	print_state(t_philo *philo, char *str)
 {
 	long long	elapsed_time;
 
+	if (philo->data->p_is_dead)
+		return ;
 	sem_wait(philo->data->print);
 	elapsed_time = get_time() - philo->data->t_start;
 	if (elapsed_time >= 0 && elapsed_time <= INT_MAX

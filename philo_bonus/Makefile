@@ -6,7 +6,7 @@
 #    By: egualand <egualand@student.42firenze.it    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 15:02:34 by egualand          #+#    #+#              #
-#    Updated: 2023/12/30 13:47:27 by egualand         ###   ########.fr        #
+#    Updated: 2024/01/03 14:36:37 by egualand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = 	check_args.c \
 		ft_atoi.c \
 		init.c \
 		philosophers.c \
-		utils.c
+		utils.c \
+		sem_check.c
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
